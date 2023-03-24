@@ -2,15 +2,22 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import sys
 
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
+from My_App import MemoApp
 
 # Press the green button in the gutter to run the script.
+
+from ui_1 import Ui_MainWindow
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

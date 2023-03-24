@@ -1,5 +1,6 @@
 import datetime
 import unittest
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Memo_App:
@@ -35,7 +36,7 @@ class Memo_App:
         date_now = datetime.datetime.now()
 
         date_now = date_now.strftime("%d.%m.%Y")
-
+        date_now = date_now[0: date_now.rfind('.')]
 
 
         birthdays = self.birth_day_dic["birthday"]
@@ -45,11 +46,36 @@ class Memo_App:
         friends_list = list()
 
         for i in birthdays:
-
-            if i == date_now:
+            temp = i[0: i.rfind('.')]
+            if temp == date_now:
                 friends_list.append(friends_name[counter])
 
             counter += 1
         if len(friends_list) > 0:
             return True, friends_list
         return False, friends_list
+
+
+    def filling_table(self, table):
+        counter = 0
+        table.setRowCount(1)
+        birthday = self.birth_day_dic['birthday']
+        friend_name = self.birth_day_dic['friend_name']
+        for i, j in zip(friend_name, birthday):
+            table.setItem(counter, 0, QtWidgets.QTableWidgetItem(i))
+            table.setItem(counter, 1, QtWidgets.QTableWidgetItem(j))
+            table.setRowCount(table.rowCount() + 1)
+            counter += 1
+
+    def filling_table_1(self, table, frinds_list):
+        date_now = datetime.datetime.now()
+        date_now = date_now.strftime("%d.%m.%Y")
+
+        counter = 0
+        table.setRowCount(1)
+        birthday = date_now
+        for i in frinds_list:
+            table.setItem(counter, 0, QtWidgets.QTableWidgetItem(i))
+            table.setItem(counter, 1, QtWidgets.QTableWidgetItem(date_now))
+            table.setRowCount(table.rowCount() + 1)
+            counter += 1
